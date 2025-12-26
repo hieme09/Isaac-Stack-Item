@@ -1,5 +1,5 @@
 return function(mod, utils)
-    -- Ensure IDs are correctly defined (Hive: 248, BFFS: 247)
+    -- 아이템 ID 안전하게 감지 (Hive: 248, BFFS: 247)
     local HIVEMIND = Isaac.GetItemIdByName("Hive Mind")
     if HIVEMIND == -1 or not HIVEMIND then HIVEMIND = 248 end
     

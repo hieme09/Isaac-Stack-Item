@@ -1,5 +1,5 @@
 return function(mod, utils)
-    -- Ensure DEAD_BIRD is correctly defined (Dead Bird ID: 117)
+    -- DEAD_BIRD ID 안전하게 감지 (Dead Bird ID: 117)
     local DEAD_BIRD = Isaac.GetItemIdByName("Dead Bird")
     if DEAD_BIRD == -1 or not DEAD_BIRD then DEAD_BIRD = 117 end
     

@@ -1,7 +1,7 @@
 local game = Game()
 
 return function(mod, utils)
-    -- Ensure HOLY_LIGHT is correctly defined (Holy Light ID: 374)
+    -- HOLY_LIGHT ID 안전하게 감지 (Holy Light ID: 374)
     local HOLY_LIGHT = Isaac.GetItemIdByName("Holy Light")
     if HOLY_LIGHT == -1 or not HOLY_LIGHT then HOLY_LIGHT = 374 end
     

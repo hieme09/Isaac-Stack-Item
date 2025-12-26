@@ -1,5 +1,5 @@
 return function(mod, utils)
-    -- Ensure TECH5 is correctly defined (Technology .5 ID: 244)
+    -- TECH5 ID 안전하게 감지 (Technology .5 ID: 244)
     local TECH5 = Isaac.GetItemIdByName("Technology .5")
     if TECH5 == -1 or not TECH5 then TECH5 = 244 end
     
@@ -46,6 +46,10 @@ return function(mod, utils)
         local baseTimeout = laser.Timeout or 12
         local baseDamage  = laser.CollisionDamage or player.Damage
         local baseMaxDist = laser.GetMaxDistance and laser:GetMaxDistance() or nil
+        -- 발사 오프셋(렌더 위치)도 원본 레이저 기준으로 맞춤
+        local basePosOffset = laser.PositionOffset
+            or (player.GetLaserOffset and player:GetLaserOffset())
+            or Vector(0, -30)
 
         local originHash = utils.pHash(laser)
         t5_origins[originHash] = laser
@@ -55,9 +59,11 @@ return function(mod, utils)
         for i = 0, extra - 1 do
             local ang = baseAngle + ((i - half) * TECH5_SPREAD_DEG)
             local spawnPos = laser.Position
-            local new = utils.ShootAngleCompat(baseVariant, ang, baseTimeout, spawnPos, player)
+            -- utils.ShootAngleCompat(variant, pos, angle, timeout, owner)
+            local new = utils.ShootAngleCompat(baseVariant, spawnPos, ang, baseTimeout, player)
             if new then
                 new.Position        = spawnPos
+                new.PositionOffset  = basePosOffset
                 new.SpawnerEntity   = player
                 new.Parent          = player
                 new.CollisionDamage = baseDamage

@@ -1,7 +1,7 @@
 local itemConfig = Isaac.GetItemConfig()
 
 return function(mod, utils)
-    -- Ensure HABIT is correctly defined (The Habit ID: 156)
+    -- HABIT ID 안전하게 감지 (The Habit ID: 156)
     local HABIT = Isaac.GetItemIdByName("The Habit")
     if HABIT == -1 or not HABIT then HABIT = 156 end
     

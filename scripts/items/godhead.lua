@@ -1,5 +1,5 @@
 return function(mod, utils)
-    -- Ensure GODHEAD is correctly defined (Godhead ID: 331)
+    -- GODHEAD ID 안전하게 감지 (Godhead ID: 331)
     local GODHEAD = Isaac.GetItemIdByName("Godhead")
     if GODHEAD == -1 or not GODHEAD then GODHEAD = 331 end
     

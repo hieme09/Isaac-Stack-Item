@@ -1,7 +1,7 @@
 local game = Game()
 
 return function(mod, utils)
-    -- Ensure SPEAR_OF_DESTINY is correctly defined (Spear of Destiny ID: 400)
+    -- SPEAR_OF_DESTINY ID 안전하게 감지 (Spear of Destiny ID: 400)
     local SPEAR_OF_DESTINY = Isaac.GetItemIdByName("Spear of Destiny")
     if SPEAR_OF_DESTINY == -1 or not SPEAR_OF_DESTINY then SPEAR_OF_DESTINY = 400 end
     

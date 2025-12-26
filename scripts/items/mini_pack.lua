@@ -1,7 +1,7 @@
 local game = Game()
 
 return function(mod, utils)
-    -- Ensure MINIPACK is correctly defined (Mini Pack ID: 711)
+    -- MINIPACK ID 안전하게 감지 (Mini Pack ID: 711)
     local MINIPACK = Isaac.GetItemIdByName("Mini Pack")
     if MINIPACK == -1 then MINIPACK = 711 end 
 

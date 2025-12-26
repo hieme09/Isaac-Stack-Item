@@ -1,11 +1,11 @@
 local game = Game()
 
 return function(mod, utils)
-    -- Ensure NINE_VOLT is correctly defined (9 Volt ID: 116)
+    -- NINE_VOLT ID 안전하게 감지 (9 Volt ID: 116)
     local NINE_VOLT = Isaac.GetItemIdByName("9 Volt")
     if NINE_VOLT == -1 or not NINE_VOLT then NINE_VOLT = 116 end
 
-    -- Queue for pending charges to be applied on the next frame
+    -- 다음 프레임에 적용할 추가 충전 대기열
     mod.nineVoltPending = mod.nineVoltPending or {}
 
     function mod:OnUseItem_NineVolt(itemID, rng, player, flags, slot, varData)
@@ -14,10 +14,10 @@ return function(mod, utils)
         local c = player:GetCollectibleNum(NINE_VOLT)
         if c <= 1 then return end
 
-        -- Use the slot provided by the callback, default to PRIMARY
+        -- 콜백에서 받은 슬롯을 우선 사용 (없으면 PRIMARY)
         local s = slot or ActiveSlot.SLOT_PRIMARY
 
-        -- Guard: Prevent multiple registrations in the same frame for the same player
+        -- 가드: 같은 플레이어가 같은 프레임에 중복 등록되는 것 방지
         local d = player:GetData()
         local f = game:GetFrameCount()
         d.__ninevolt_last_frame = d.__ninevolt_last_frame or -999
@@ -26,12 +26,12 @@ return function(mod, utils)
         end
         d.__ninevolt_last_frame = f
 
-        -- Add +1 charge per extra stack (Engine already gives the first +1)
+        -- 추가 스택당 +1 충전 (엔진이 첫 +1은 이미 처리함)
         table.insert(mod.nineVoltPending, {
             player = player,
             slot   = s,
             add    = (c - 1),
-            frame  = f + 1, -- Apply on the next frame after engine processing
+            frame  = f + 1, -- 엔진 처리 이후 다음 프레임에 적용
         })
     end
     mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseItem_NineVolt)

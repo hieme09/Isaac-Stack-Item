@@ -1,5 +1,5 @@
 return function(mod, utils)
-    -- Ensure IDs are correctly defined (Choco: 69, MiP: 109)
+    -- 아이템 ID 안전하게 감지 (Choco: 69, MiP: 109)
     local CHOCOLATE_MILK = Isaac.GetItemIdByName("Chocolate Milk")
     if CHOCOLATE_MILK == -1 or not CHOCOLATE_MILK then CHOCOLATE_MILK = 69 end
     
